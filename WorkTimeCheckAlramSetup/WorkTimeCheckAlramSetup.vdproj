@@ -15,7 +15,13 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_24B4EAB0FF0B4369AEFCEB1B844A5A22"
+        "MsmKey" = "8:_0E9FA9D742EF4737B504845DB95DE37D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_20473EA14A364E3AB047A98427F29FF3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -27,7 +33,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_418162C90F0540F4A5F9D2BC85346CB4"
+        "MsmKey" = "8:_42E7E84C274048AD83D18ACCB6233551"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -39,19 +45,25 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_5DCD3EEAA3864801A73B42BF47DE2C98"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_6ECD56C6715CA46B06E4ED5EAEADC980"
         "OwnerKey" = "8:_EF0A83DC0C9A415A8ADCB8DAADA203FF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
+        "MsmKey" = "8:_7262E51AC21D485AACAF5EF377B3FA0D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_85E382130DAC423980933037636CD6BE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_894A41F44AFD405BB7B85E9071803F9B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -180,10 +192,30 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_24B4EAB0FF0B4369AEFCEB1B844A5A22"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0E9FA9D742EF4737B504845DB95DE37D"
             {
-            "SourcePath" = "8:D:\\DownLoad\\start.ico"
-            "TargetName" = "8:start.ico"
+            "SourcePath" = "8:..\\WorkTimeCheckAlarmService\\WorkTimeCheckAlarmSetting.json"
+            "TargetName" = "8:WorkTimeCheckAlarmSetting.json"
+            "Tag" = "8:"
+            "Folder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_20473EA14A364E3AB047A98427F29FF3"
+            {
+            "SourcePath" = "8:D:\\DownLoad\\Delete.ico"
+            "TargetName" = "8:Delete.ico"
             "Tag" = "8:"
             "Folder" = "8:_5CAA4F1DA8A74B318E14B7A256970F78"
             "Condition" = "8:"
@@ -231,10 +263,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_418162C90F0540F4A5F9D2BC85346CB4"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_42E7E84C274048AD83D18ACCB6233551"
             {
-            "SourcePath" = "8:D:\\DownLoad\\notice.ico"
-            "TargetName" = "8:notice.ico"
+            "SourcePath" = "8:D:\\DownLoad\\Notice.ico"
+            "TargetName" = "8:Notice.ico"
             "Tag" = "8:"
             "Folder" = "8:_5CAA4F1DA8A74B318E14B7A256970F78"
             "Condition" = "8:"
@@ -257,26 +289,6 @@
             "TargetName" = "8:WorkTimeCheckAlram_Create.bat"
             "Tag" = "8:"
             "Folder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5DCD3EEAA3864801A73B42BF47DE2C98"
-            {
-            "SourcePath" = "8:D:\\DownLoad\\del.ico"
-            "TargetName" = "8:del.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_5CAA4F1DA8A74B318E14B7A256970F78"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -322,6 +334,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7262E51AC21D485AACAF5EF377B3FA0D"
+            {
+            "SourcePath" = "8:D:\\DownLoad\\Setting.ico"
+            "TargetName" = "8:Setting.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_5CAA4F1DA8A74B318E14B7A256970F78"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_85E382130DAC423980933037636CD6BE"
             {
             "SourcePath" = "8:..\\WorkTimeCheckAlarmService\\Notice.txt"
@@ -337,6 +369,26 @@
             "Permanent" = "11:FALSE"
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:2"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_894A41F44AFD405BB7B85E9071803F9B"
+            {
+            "SourcePath" = "8:D:\\DownLoad\\Create.ico"
+            "TargetName" = "8:Create.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_5CAA4F1DA8A74B318E14B7A256970F78"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
@@ -452,7 +504,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WorkTimeCheckAlram"
         "ProductCode" = "8:{5BA85040-088A-4CD6-98CB-9DBCAFC4BF13}"
-        "PackageCode" = "8:{5E64E461-4DB9-4DD2-800F-30A0859359E3}"
+        "PackageCode" = "8:{2062FDCD-5C55-4781-B343-058BC5EC2566}"
         "UpgradeCode" = "8:{C7ECF37F-59B2-43B7-BB54-4FED5DB6A757}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -572,6 +624,20 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_1D48BD9E4A224A7BB079B13B81A3127E"
+            {
+            "Name" = "8:설정 변경"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_0E9FA9D742EF4737B504845DB95DE37D"
+            "Folder" = "8:_34195AA1663B4E3DAF624590A68545B8"
+            "WorkingFolder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
+            "Icon" = "8:_7262E51AC21D485AACAF5EF377B3FA0D"
+            "Feature" = "8:"
+            }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4D2F957E5A6F4D079EF2FFBFE4C8BF2D"
             {
             "Name" = "8:설명서"
@@ -583,7 +649,7 @@
             "Target" = "8:_85E382130DAC423980933037636CD6BE"
             "Folder" = "8:_34195AA1663B4E3DAF624590A68545B8"
             "WorkingFolder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
-            "Icon" = "8:_418162C90F0540F4A5F9D2BC85346CB4"
+            "Icon" = "8:_42E7E84C274048AD83D18ACCB6233551"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_56E22403812B467998C43F3189A9C12C"
@@ -597,7 +663,7 @@
             "Target" = "8:_A48A16AC00CF4D9D852C469539E7E5CF"
             "Folder" = "8:_34195AA1663B4E3DAF624590A68545B8"
             "WorkingFolder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
-            "Icon" = "8:_5DCD3EEAA3864801A73B42BF47DE2C98"
+            "Icon" = "8:_20473EA14A364E3AB047A98427F29FF3"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_6ACA7F73B7C849E98E42FC039763FFBC"
@@ -611,7 +677,7 @@
             "Target" = "8:_50F5B2081E30478D837570533BE18E44"
             "Folder" = "8:_34195AA1663B4E3DAF624590A68545B8"
             "WorkingFolder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
-            "Icon" = "8:_24B4EAB0FF0B4369AEFCEB1B844A5A22"
+            "Icon" = "8:_894A41F44AFD405BB7B85E9071803F9B"
             "Feature" = "8:"
             }
         }

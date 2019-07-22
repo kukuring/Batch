@@ -61,7 +61,7 @@ namespace WorkTimeCheckAlarmService
 
         protected override void OnSessionChange(SessionChangeDescription changeDescription)
         {
-            util.WriteLog("출근체크", $"OnSessionChange: {JsonConvert.SerializeObject(changeDescription)}");
+            util.WriteLog("출근체크", $"OnSessionChange: \r\n{JsonConvert.SerializeObject(changeDescription, Formatting.Indented)}");
 
             switch (changeDescription.Reason)
             {
@@ -109,13 +109,13 @@ namespace WorkTimeCheckAlarmService
                 checkOption.isCheckOutCall = false;
                 checkOption.isWorkingDay = CheckWorkingDay();
                 checkOption.addMinute = rd.Next(0, 20) * -1;
-                util.WriteLog("출근체크", $"초기화 했음. CheckOption: {JsonConvert.SerializeObject(checkOption)}");
+                util.WriteLog("출근체크", $"초기화 했음. CheckOption: \r\n{JsonConvert.SerializeObject(checkOption, Formatting.Indented)}");
             }
 
             // 정각마다 작동여부 로그 남기기
             if (DateTime.Now.Minute == 0)
             {
-                util.WriteLog("출근체크", $"정각 로그. CheckOption: {JsonConvert.SerializeObject(checkOption)}");
+                util.WriteLog("출근체크", $"정각 로그. CheckOption: \r\n{JsonConvert.SerializeObject(checkOption, Formatting.Indented)}");
             }
 
             // 출근하는날이 아니면 체크 안함.
@@ -228,7 +228,7 @@ namespace WorkTimeCheckAlarmService
                 {
                     if (item.date < DateTime.Now && DateTime.Now < item.date.AddDays(1))
                     {
-                        util.WriteLog("출근체크", $"공휴일!. CheckOption: {JsonConvert.SerializeObject(checkOption)}");
+                        util.WriteLog("출근체크", $"공휴일!. CheckOption: \r\n{JsonConvert.SerializeObject(checkOption, Formatting.Indented)}");
                         return false;
                     }
                 }
@@ -242,7 +242,7 @@ namespace WorkTimeCheckAlarmService
                 {
                     if (item < DateTime.Now && DateTime.Now < item.AddDays(1))
                     {
-                        util.WriteLog("출근체크", $"쉬는날!. CheckOption: {JsonConvert.SerializeObject(checkOption)}");
+                        util.WriteLog("출근체크", $"쉬는날!. CheckOption: \r\n{JsonConvert.SerializeObject(checkOption, Formatting.Indented)}");
                         return false;
                     }
                 }
@@ -360,7 +360,7 @@ namespace WorkTimeCheckAlarmService
             }
 
             checkOption.cdSabn = setEncId(checkOption.id);
-            util.WriteLog("출근체크", $"설정파일 로드. CheckOption: {JsonConvert.SerializeObject(checkOption)}");
+            util.WriteLog("출근체크", $"설정파일 로드. CheckOption: \r\n {JsonConvert.SerializeObject(checkOption, Formatting.Indented)}");
         }
 
         /// <summary>

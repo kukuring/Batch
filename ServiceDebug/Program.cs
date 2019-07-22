@@ -21,6 +21,7 @@ namespace ServiceDebug
     class Program
     {
         private static CheckOption checkOption;
+        private static EventLog eventLog = new EventLog();
         [STAThread]
         static void Main(string[] args)
         {
@@ -56,8 +57,6 @@ namespace ServiceDebug
             SetCheckOption();
 
 
-            Console.WriteLine("dd");
-
             //// 공휴일 체크
             //if (checkOption.holiday != null)
             //{                
@@ -71,8 +70,20 @@ namespace ServiceDebug
             //    Console.WriteLine(true);
             //}
 
+            WriteLog("출근체크", $"테스트로그찍기: \r\n {JsonConvert.SerializeObject(checkOption, Formatting.Indented)}");
 
         }
+
+        public static void WriteLog(string key, string value)
+        {
+            if (!System.Diagnostics.EventLog.SourceExists("출퇴근체크"))
+            {
+                System.Diagnostics.EventLog.CreateEventSource("출퇴근체크", "출퇴근체크");
+            }
+            eventLog.Source = "출퇴근체크";
+            eventLog.WriteEntry($"{key} {value}", System.Diagnostics.EventLogEntryType.Information);
+        }
+
 
         public static string setEncId(string id)
         {
@@ -237,7 +248,7 @@ namespace ServiceDebug
         /// <summary>
         /// 쉬는날
         /// </summary>
-        public List<DateTime> dayOff { get; set; }
+        public List<DateTime> myHoliday { get; set; }
 
         /// <summary>
         /// 공휴일
