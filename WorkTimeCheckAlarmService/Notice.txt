@@ -1,0 +1,19 @@
+﻿* 설치속도가 느리니 이해해줄것.
+
+1. 설치폴더 변경하지말것. 
+
+2. 설치 후 C:\Program Files\Inpark\WorkTimeCheckAlram\WorkTimeCheckAlram_Create.bat 또는 프로그램 목록에서 [서비스 등록]실행.
+
+3. 설정파일은 C:\Program Files\Inpark\WorkTimeCheckAlram\WorkTimeCheckAlarmSetting.json
+
+4. 설정에 useCheckInAutoCall 값이 "true"면 자동 출근체크하며 "false"면 팝업으로 출근체크 여부를 컨펌창으로 확인받아 출근체크함.
+
+5. 설정에 holiday는 국가공휴일이며 설정에 미리 입력된 공휴일 이외에 추가된 공휴일은 직접 넣을것
+
+6. myholiday는 연차나 회사 안오는날짜 미리 넣어두면 출근체크 안함.
+
+7. 설정파일은 수정 즉시 적용됨.
+
+8. 프로그램 삭제 시 C:\Program Files\Inpark\WorkTimeCheckAlram\WorkTimeCheckAlram_Delete.bat 또는 프로그램 목록에서 [서비스 삭제]실행 후 제어판에서 프로그램 지울껏.
+
+9. 프로그램 관련 로그는 "윈도우 이벤트 뷰어>응용 프로그램 및 서비스 로그>출퇴근체크"에서 확인가능.
