@@ -57,6 +57,16 @@ namespace ServiceDebug
             SetCheckOption();
 
 
+            if (Convert.ToDateTime(checkOption.checkInTime).AddMinutes(5) < DateTime.Now)
+            {
+                Console.WriteLine("1");
+            }
+            else
+            {
+                Console.WriteLine("2");
+            }
+
+
             //// 공휴일 체크
             //if (checkOption.holiday != null)
             //{                
@@ -70,7 +80,7 @@ namespace ServiceDebug
             //    Console.WriteLine(true);
             //}
 
-            WriteLog("출근체크", $"테스트로그찍기: \r\n {JsonConvert.SerializeObject(checkOption, Formatting.Indented)}");
+                WriteLog("출근체크", $"테스트로그찍기: \r\n {JsonConvert.SerializeObject(checkOption, Formatting.Indented)}");
 
         }
 

@@ -7,6 +7,7 @@ using System.Media;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WorkTimeCheckAlarmService
@@ -64,6 +65,24 @@ namespace WorkTimeCheckAlarmService
             }
             eventLog.Source = "출퇴근체크";
             eventLog.WriteEntry($"{key} {value}", System.Diagnostics.EventLogEntryType.Information);
+        }
+
+
+        public void CallBeep()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                SystemSounds.Asterisk.Play();
+                Thread.Sleep(400);
+                SystemSounds.Beep.Play();
+                Thread.Sleep(400);
+                SystemSounds.Exclamation.Play();
+                Thread.Sleep(400);
+                SystemSounds.Hand.Play();
+                Thread.Sleep(400);
+                SystemSounds.Question.Play();
+                Thread.Sleep(400);
+            }
         }
 
 

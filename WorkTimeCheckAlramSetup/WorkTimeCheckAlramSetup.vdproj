@@ -15,13 +15,13 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_0E9FA9D742EF4737B504845DB95DE37D"
+        "MsmKey" = "8:_006F09CA4CCE4D16B645D2F052397488"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_20473EA14A364E3AB047A98427F29FF3"
+        "MsmKey" = "8:_0E9FA9D742EF4737B504845DB95DE37D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -29,12 +29,6 @@
         {
         "MsmKey" = "8:_3A6A72807EF84CF082B6BF015114CB0C"
         "OwnerKey" = "8:_EF0A83DC0C9A415A8ADCB8DAADA203FF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_42E7E84C274048AD83D18ACCB6233551"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -51,25 +45,31 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_7262E51AC21D485AACAF5EF377B3FA0D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_85E382130DAC423980933037636CD6BE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_894A41F44AFD405BB7B85E9071803F9B"
+        "MsmKey" = "8:_8F83008D011D4C5BAF762A206627309C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_A48A16AC00CF4D9D852C469539E7E5CF"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B32FDECD8D6048678CA418FCE7EFB985"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CB2C806C2F2F4D8DB26F8BAC67F28A4A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -192,12 +192,12 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0E9FA9D742EF4737B504845DB95DE37D"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_006F09CA4CCE4D16B645D2F052397488"
             {
-            "SourcePath" = "8:..\\WorkTimeCheckAlarmService\\WorkTimeCheckAlarmSetting.json"
-            "TargetName" = "8:WorkTimeCheckAlarmSetting.json"
+            "SourcePath" = "8:D:\\DownLoad\\delete.ico"
+            "TargetName" = "8:delete.ico"
             "Tag" = "8:"
-            "Folder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
+            "Folder" = "8:_5CAA4F1DA8A74B318E14B7A256970F78"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -212,12 +212,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_20473EA14A364E3AB047A98427F29FF3"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0E9FA9D742EF4737B504845DB95DE37D"
             {
-            "SourcePath" = "8:D:\\DownLoad\\Delete.ico"
-            "TargetName" = "8:Delete.ico"
+            "SourcePath" = "8:..\\WorkTimeCheckAlarmService\\WorkTimeCheckAlarmSetting.json"
+            "TargetName" = "8:WorkTimeCheckAlarmSetting.json"
             "Tag" = "8:"
-            "Folder" = "8:_5CAA4F1DA8A74B318E14B7A256970F78"
+            "Folder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -261,26 +261,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_42E7E84C274048AD83D18ACCB6233551"
-            {
-            "SourcePath" = "8:D:\\DownLoad\\Notice.ico"
-            "TargetName" = "8:Notice.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_5CAA4F1DA8A74B318E14B7A256970F78"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_50F5B2081E30478D837570533BE18E44"
@@ -334,26 +314,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7262E51AC21D485AACAF5EF377B3FA0D"
-            {
-            "SourcePath" = "8:D:\\DownLoad\\Setting.ico"
-            "TargetName" = "8:Setting.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_5CAA4F1DA8A74B318E14B7A256970F78"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_85E382130DAC423980933037636CD6BE"
             {
             "SourcePath" = "8:..\\WorkTimeCheckAlarmService\\Notice.txt"
@@ -374,10 +334,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_894A41F44AFD405BB7B85E9071803F9B"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F83008D011D4C5BAF762A206627309C"
             {
-            "SourcePath" = "8:D:\\DownLoad\\Create.ico"
-            "TargetName" = "8:Create.ico"
+            "SourcePath" = "8:D:\\DownLoad\\create.ico"
+            "TargetName" = "8:create.ico"
             "Tag" = "8:"
             "Folder" = "8:_5CAA4F1DA8A74B318E14B7A256970F78"
             "Condition" = "8:"
@@ -400,6 +360,46 @@
             "TargetName" = "8:WorkTimeCheckAlram_Delete.bat"
             "Tag" = "8:"
             "Folder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B32FDECD8D6048678CA418FCE7EFB985"
+            {
+            "SourcePath" = "8:D:\\DownLoad\\notice.ico"
+            "TargetName" = "8:notice.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_5CAA4F1DA8A74B318E14B7A256970F78"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CB2C806C2F2F4D8DB26F8BAC67F28A4A"
+            {
+            "SourcePath" = "8:D:\\DownLoad\\setting.ico"
+            "TargetName" = "8:setting.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_5CAA4F1DA8A74B318E14B7A256970F78"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -504,7 +504,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WorkTimeCheckAlram"
         "ProductCode" = "8:{5BA85040-088A-4CD6-98CB-9DBCAFC4BF13}"
-        "PackageCode" = "8:{2062FDCD-5C55-4781-B343-058BC5EC2566}"
+        "PackageCode" = "8:{A5193407-1F38-4F7E-AD26-0689AB2615B0}"
         "UpgradeCode" = "8:{C7ECF37F-59B2-43B7-BB54-4FED5DB6A757}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -635,7 +635,7 @@
             "Target" = "8:_0E9FA9D742EF4737B504845DB95DE37D"
             "Folder" = "8:_34195AA1663B4E3DAF624590A68545B8"
             "WorkingFolder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
-            "Icon" = "8:_7262E51AC21D485AACAF5EF377B3FA0D"
+            "Icon" = "8:_CB2C806C2F2F4D8DB26F8BAC67F28A4A"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4D2F957E5A6F4D079EF2FFBFE4C8BF2D"
@@ -649,7 +649,7 @@
             "Target" = "8:_85E382130DAC423980933037636CD6BE"
             "Folder" = "8:_34195AA1663B4E3DAF624590A68545B8"
             "WorkingFolder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
-            "Icon" = "8:_42E7E84C274048AD83D18ACCB6233551"
+            "Icon" = "8:_B32FDECD8D6048678CA418FCE7EFB985"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_56E22403812B467998C43F3189A9C12C"
@@ -663,7 +663,7 @@
             "Target" = "8:_A48A16AC00CF4D9D852C469539E7E5CF"
             "Folder" = "8:_34195AA1663B4E3DAF624590A68545B8"
             "WorkingFolder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
-            "Icon" = "8:_20473EA14A364E3AB047A98427F29FF3"
+            "Icon" = "8:_006F09CA4CCE4D16B645D2F052397488"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_6ACA7F73B7C849E98E42FC039763FFBC"
@@ -677,7 +677,7 @@
             "Target" = "8:_50F5B2081E30478D837570533BE18E44"
             "Folder" = "8:_34195AA1663B4E3DAF624590A68545B8"
             "WorkingFolder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
-            "Icon" = "8:_894A41F44AFD405BB7B85E9071803F9B"
+            "Icon" = "8:_8F83008D011D4C5BAF762A206627309C"
             "Feature" = "8:"
             }
         }

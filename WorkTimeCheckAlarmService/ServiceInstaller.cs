@@ -14,7 +14,7 @@ namespace WorkTimeCheckAlarm
     public partial class ServiceInstaller : System.Configuration.Install.Installer
     {
         private readonly ServiceProcessInstaller processInstaller;
-        private readonly System.ServiceProcess.ServiceInstaller serviceInstaller;
+        private readonly System.ServiceProcess.ServiceInstaller serviceInstaller;        
         private WorkTimeCheckAlarmService.Util util = new WorkTimeCheckAlarmService.Util();
 
 
@@ -37,7 +37,18 @@ namespace WorkTimeCheckAlarm
             util.WriteLog("출근체크", "프로그램 설치 시작(ServiceInstaller)");
 
             serviceInstaller.AfterInstall += ServiceInstaller_AfterInstall;
+            serviceInstaller.BeforeUninstall += ServiceInstaller_BeforeUninstall;
         }
+
+        private void ServiceInstaller_BeforeUninstall(object sender, InstallEventArgs e)
+        {
+            util.WriteLog("출근체크", "프로그램 삭제 시작(ServiceInstaller_BeforeUninstall)");
+            ServiceController sc = new ServiceController("WorkTimeCheckAlarmService");
+            sc.Stop();            
+            serviceInstaller.Uninstall(null);
+
+        }
+
         private void ServiceInstaller_AfterInstall(object sender, InstallEventArgs e)
         {
             util.WriteLog("출근체크", "프로그램 설치 시작(ServiceInstaller_AfterInstall)");

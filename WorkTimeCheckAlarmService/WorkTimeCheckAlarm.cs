@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -41,15 +42,8 @@ namespace WorkTimeCheckAlarmService
 
         protected override void OnStart(string[] args)
         {
-            util.WriteLog("출근체크", "프로그램 시작");
+            util.WriteLog("출근체크", "프로그램 시작1");
             SetCheckOption();
-
-            // 출근시간 이후 서비스 시작 대비
-            if (Convert.ToDateTime(checkOption.checkInTime).AddMinutes(5) < DateTime.Now)
-            {
-                checkOption.useDesktop = true;          
-                checkOption.isCheckInCall = true;
-            }
 
             timer = new System.Timers.Timer();
             timer.Interval = 60 * 1000;
@@ -61,14 +55,17 @@ namespace WorkTimeCheckAlarmService
 
         protected override void OnSessionChange(SessionChangeDescription changeDescription)
         {
-            util.WriteLog("출근체크", $"OnSessionChange: \r\n{JsonConvert.SerializeObject(changeDescription, Formatting.Indented)}");
+            util.WriteLog("출근체크", $"OnSessionChange: {JsonConvert.SerializeObject(changeDescription)}");
 
             switch (changeDescription.Reason)
             {
                 case SessionChangeReason.SessionLogon:
                 case SessionChangeReason.SessionUnlock:
                     checkOption.useDesktop = true;
-                    WorkTimeCheck();
+                    if (!checkOption.isCheckInCall)
+                    {
+                        CheckIn();
+                    }
                     break;
                 case SessionChangeReason.SessionLogoff:
                 case SessionChangeReason.SessionLock:
@@ -100,15 +97,14 @@ namespace WorkTimeCheckAlarmService
 
             #region 로직체크
             // 초기화(매일 새벽 1시)
-            if (DateTime.Now.Hour == 1 && DateTime.Now.Minute < 5)
+            if (DateTime.Now.Hour == 1 && DateTime.Now.Minute < 2)
             {
                 Random rd = new Random();
-                SetCheckOption();
                 checkOption.useDesktop = false;
                 checkOption.isCheckInCall = false;
                 checkOption.isCheckOutCall = false;
-                checkOption.isWorkingDay = CheckWorkingDay();
                 checkOption.addMinute = rd.Next(0, 20) * -1;
+                checkOption.isWorkingDay = CheckWorkingDay();
                 util.WriteLog("출근체크", $"초기화 했음. CheckOption: \r\n{JsonConvert.SerializeObject(checkOption, Formatting.Indented)}");
             }
 
@@ -129,55 +125,37 @@ namespace WorkTimeCheckAlarmService
             #region 출근체크
             try
             {
-                if (checkOption.useCheckInAutoCall)
+                // 출근체크 시간: 07:30 <= 07:35 && 07:35 <= 08:00
+                if (checkInTime.AddMinutes(-30) <= DateTime.Now && DateTime.Now <= checkInTime.AddMinutes(5))
                 {
-                    checkInTime = checkInTime.AddMinutes(checkOption.addMinute);    // 랜덤 시간(출근20분전 ~ 출근시간 ex: 07:40~08:00)
-                    if (checkInTime.Hour == DateTime.Now.Hour && checkInTime.Minute == DateTime.Now.Minute)
+                    // 출근체크 한번 했으면 출근체크 안함.
+                    if (checkOption.isCheckInCall)
                     {
-                        CheckIn();
+                        return;
                     }
-                }
-                else
-                {
-                    // 출근체크 시간: 07:30 <= 07:35 && 07:35 <= 08:00
-                    if (checkInTime.AddMinutes(-30) <= DateTime.Now && DateTime.Now <= checkInTime.AddMinutes(5))
-                    {
-                        // 출근체크 한번 했으면 출근체크 안함.
-                        if (checkOption.isCheckInCall)
-                        {
-                            return;
-                        }
 
-                        // PC 사용 체크면 PC로그온 체크, 아니면 바로 호출
+                    if (checkOption.useCheckInAutoCall)
+                    {
+                        // 랜덤 시간(출근20분전 ~ 출근시간 ex: 07:40~08:00)
+                        checkInTime = checkInTime.AddMinutes(checkOption.addMinute);
+                        if (checkInTime.Hour == DateTime.Now.Hour && checkInTime.Minute == DateTime.Now.Minute)
+                        {
+                            CheckIn();
+                        }
+                    }
+                    else
+                    {
+                        // PC 사용 체크면 PC로그온 체크
                         if (checkOption.useDesktop)
                         {
+                            CheckIn();
+
                             // 3분전부터 비프음
                             if (checkInTime.AddMinutes(-3) <= DateTime.Now)
                             {
-                                for (int i = 0; i < 3; i++)
-                                {
-                                    SystemSounds.Asterisk.Play();
-                                    Thread.Sleep(400);
-                                    SystemSounds.Beep.Play();
-                                    Thread.Sleep(400);
-                                    SystemSounds.Exclamation.Play();
-                                    Thread.Sleep(400);
-                                    SystemSounds.Hand.Play();
-                                    Thread.Sleep(400);
-                                    SystemSounds.Question.Play();
-                                    Thread.Sleep(400);
-                                }
+                                util.CallBeep();
                             }
-                            CheckIn();
                         }
-                        //else
-                        //{
-                        //    // 출근시간 4분지나도 체크 안됐으면 강제 체크함.
-                        //    if (checkInTime.Hour == DateTime.Now.Hour && checkInTime.AddMinutes(4).Minute == DateTime.Now.Minute)
-                        //    {
-                        //        CheckIn();
-                        //    }
-                        //}
                     }
                 }
             }
@@ -191,7 +169,7 @@ namespace WorkTimeCheckAlarmService
             try
             {
                 // 퇴근체크시간 10분후에 자동 퇴근체크함.
-                if (DateTime.Now.Hour == checkOutTime.Hour && DateTime.Now.Minute == checkOutTime.AddMinutes(10).Millisecond)
+                if (DateTime.Now.Hour == checkOutTime.Hour && DateTime.Now.Minute == checkOutTime.AddMinutes(10).Minute)
                 {
                     // 출근체크를 했고 퇴근체크 한번 했으면 더이상 안함.
                     if (checkOption.isCheckInCall && !checkOption.isCheckOutCall)
@@ -257,18 +235,10 @@ namespace WorkTimeCheckAlarmService
         private void CheckIn()
         {
             string result = string.Empty;
-            if (checkOption.useCheckInAutoCall)
+            if (checkOption.useCheckInAutoCall || (util.MessageBox("출근체크", "출근체크 하시겠습니까?", 4, false) == 6))
             {
                 result = util.GetResponse($"{checkInOutUrl}&cdSabn={checkOption.cdSabn}&fgGubn=On", string.Empty, 10000, "GET", null, null, out outCookie);
             }
-            else
-            {
-                if (util.MessageBox("출근체크", "출근체크 하시겠습니까?", 4, false) == 6)
-                {
-                    result = util.GetResponse($"{checkInOutUrl}&cdSabn={checkOption.cdSabn}&fgGubn=On", string.Empty, 10000, "GET", null, null, out outCookie);
-                }
-            }
-
 
             ResultInfo resultInfo = JsonConvert.DeserializeObject<ResultInfo>(result);
             if (resultInfo.code == 200 || resultInfo.message == "OK")
@@ -359,8 +329,16 @@ namespace WorkTimeCheckAlarmService
                 util.MessageBox("출근체크", "퇴근시간이 올바르지 않습니다.", 0, false);
             }
 
+            // 출근시간 이후 서비스 시작 대비
+            if (Convert.ToDateTime(checkOption.checkInTime).AddMinutes(5) < DateTime.Now)
+            {
+                checkOption.useDesktop = true;
+                checkOption.isCheckInCall = true;
+            }
             checkOption.cdSabn = setEncId(checkOption.id);
-            util.WriteLog("출근체크", $"설정파일 로드. CheckOption: \r\n {JsonConvert.SerializeObject(checkOption, Formatting.Indented)}");
+            checkOption.isWorkingDay = CheckWorkingDay();
+
+            util.WriteLog("출근체크", $"설정파일 로드. CheckOption: \r\n{JsonConvert.SerializeObject(checkOption, Formatting.Indented)}");
         }
 
         /// <summary>
@@ -465,16 +443,14 @@ namespace WorkTimeCheckAlarmService
 
         /// <summary>
         /// 쉬는날
-        /// </summary>
+        /// </summary>                
         public List<DateTime> myHoliday { get; set; }
 
         /// <summary>
         /// 공휴일
         /// </summary>
+        [JsonIgnore]
         public List<Holiday> holiday { get; set; }
-
-
-
     }
 
     public class Holiday
@@ -483,7 +459,6 @@ namespace WorkTimeCheckAlarmService
 
         public string name { get; set; }
     }
-
 
 
     /// <summary>
