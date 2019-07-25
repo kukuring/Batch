@@ -169,7 +169,7 @@ namespace WorkTimeCheckAlarmService
             try
             {
                 // 퇴근체크시간 10분후에 자동 퇴근체크함.
-                if (DateTime.Now.Hour == checkOutTime.Hour && DateTime.Now.Minute == checkOutTime.AddMinutes(10).Minute)
+                if (DateTime.Now.Hour == checkOutTime.Hour && DateTime.Now.Minute == checkOutTime.Minute)
                 {
                     // 출근체크를 했고 퇴근체크 한번 했으면 더이상 안함.
                     if (checkOption.isCheckInCall && !checkOption.isCheckOutCall)

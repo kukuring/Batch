@@ -248,7 +248,7 @@
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
-            "Folder" = "8:_7D809FC82EDA4626A136CCF57A176B9A"
+            "Folder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -299,7 +299,7 @@
             "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
-            "Folder" = "8:_7D809FC82EDA4626A136CCF57A176B9A"
+            "Folder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -474,17 +474,6 @@
                         {
                         }
                     }
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_7D809FC82EDA4626A136CCF57A176B9A"
-                    {
-                    "Name" = "8:dll"
-                    "AlwaysCreate" = "11:TRUE"
-                    "Condition" = "8:"
-                    "Transitive" = "11:FALSE"
-                    "Property" = "8:_41C836EA45C54E6C9C222975F378A029"
-                        "Folders"
-                        {
-                        }
-                    }
                 }
             }
         }
@@ -504,7 +493,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WorkTimeCheckAlram"
         "ProductCode" = "8:{5BA85040-088A-4CD6-98CB-9DBCAFC4BF13}"
-        "PackageCode" = "8:{A5193407-1F38-4F7E-AD26-0689AB2615B0}"
+        "PackageCode" = "8:{F8949B08-F1D9-4076-A47B-1D6FAA5CC3B9}"
         "UpgradeCode" = "8:{C7ECF37F-59B2-43B7-BB54-4FED5DB6A757}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
