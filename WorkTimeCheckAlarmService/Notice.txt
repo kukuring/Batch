@@ -1,19 +1,54 @@
 ﻿* 설치속도가 느리니 이해해줄것.
 
-1. 설치폴더 변경하지말것. 
+1. 설치경로 변경하지말것. 
 
-2. 설치 후 C:\Program Files\Inpark\WorkTimeCheckAlram\WorkTimeCheckAlram_Create.bat 또는 프로그램 목록에서 [서비스 등록]실행.
+2. 설치 중 커맨드창(검은창)이 뜨는데 [사번, 출근시간, 퇴근시간, 자동출근여부체크]를 꼭 입력할것.
 
-3. 설정파일은 C:\Program Files\Inpark\WorkTimeCheckAlram\WorkTimeCheckAlarmSetting.json
+3. 설정 수정은 [윈도우 시작버튼▶모든 프로그램▶WorkTimeCheckAlram▶설정 변경] 
+   또는 C:\Program Files\Inpark\WorkTimeCheckAlram\WorkTimeCheckAlarmSetting.json 에서 수정가능
 
-4. 설정에 useCheckInAutoCall 값이 "true"면 자동 출근체크하며 "false"면 팝업으로 출근체크 여부를 컨펌창으로 확인받아 출근체크함.
+	{
+	   "checkInTime": "08:00",			// 출근시간
+	   "checkOutTime": "17:00",			// 퇴근시간
+	   "id": "N13220",				// 사번
+	   "useCheckInAutoCall": "false",		// 자동 출퇴근 여부
 
-5. 설정에 holiday는 국가공휴일이며 설정에 미리 입력된 공휴일 이외에 추가된 공휴일은 직접 넣을것
+	   "myHoliday": [				// 개인휴가
+			  { 
+				"date": "2019-01-01",	// 휴가일
+				"type": "ALL",		// ALL:연차, AM:오전반차, PM:오후반차
+				"name": ""		// 빈값
+			  },
+			  { 
+				"date": "2019-01-02",
+				"type": "AM", 
+				"name": "" 
+			  }
+	   ],
+	   "holiday": [					// 공휴일
+			  {		
+				"date": "2019-01-01",	// 공휴일날짜
+				"type": "ALL",		// ALL:전체
+				"name": "신정"		// 공휴일명칭
+			  },
+			  { 
+				"date": "2019-05-05", 
+				"type": "ALL", 
+				"name": "어린이날" 
+			  }
+	}
 
-6. myholiday는 연차나 회사 안오는날짜 미리 넣어두면 출근체크 안함.
 
-7. 설정파일은 수정 즉시 적용됨.
+4. 추가된 지정된 공휴일이 생겨날 경우(대통령선거, 임시공휴일 등등) 설정파일 holiday(국가공휴일)에 추가할것.
 
-8. 프로그램 삭제 시 C:\Program Files\Inpark\WorkTimeCheckAlram\WorkTimeCheckAlram_Delete.bat 또는 프로그램 목록에서 [서비스 삭제]실행 후 제어판에서 프로그램 지울껏.
+5. myholiday는 연차나 회사 안오는날짜 미리 넣어두면 출근체크 안함.
+   (퇴근시간에 한번 더 물어봐서 재 셋팅하긴 함.)
 
-9. 프로그램 관련 로그는 "윈도우 이벤트 뷰어>응용 프로그램 및 서비스 로그>출퇴근체크"에서 확인가능.
+6. 설정파일은 수정 즉시 적용됨.
+
+7. 프로그램 관련 로그는 [윈도우 이벤트 뷰어▶응용 프로그램 및 서비스 로그▶출퇴근체크]에서 확인가능
+   (윈도우 실행창에 eventvwr 입력하면 이벤트뷰어 뜸).
+
+8. 바이오스 설정에서 PC 자동부팅 스케줄을 설정해놓으면 시너지 효과 남.
+   ASUS 메인보드   ▶ http://ststory.com/13965
+   ASRock 메인보드 ▶ https://prolite.tistory.com/657

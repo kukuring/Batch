@@ -55,7 +55,7 @@ namespace WorkTimeCheckAlarmService
 
         protected override void OnSessionChange(SessionChangeDescription changeDescription)
         {
-            util.WriteLog("출근체크", $"OnSessionChange: {JsonConvert.SerializeObject(changeDescription)}");
+            util.WriteLog("출근체크", $"OnSessionChange: {JsonConvert.SerializeObject(changeDescription, new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-dd" })}");
 
             switch (changeDescription.Reason)
             {
@@ -104,20 +104,38 @@ namespace WorkTimeCheckAlarmService
                 checkOption.isCheckInCall = false;
                 checkOption.isCheckOutCall = false;
                 checkOption.addMinute = rd.Next(0, 20) * -1;
-                checkOption.isWorkingDay = CheckWorkingDay();
-                util.WriteLog("출근체크", $"초기화 했음. CheckOption: \r\n{JsonConvert.SerializeObject(checkOption, Formatting.Indented)}");
+                checkOption.holidayType = CheckHolidayType(DateTime.Now);
+                util.WriteLog("출근체크", $"초기화 했음. CheckOption: \r\n{JsonConvert.SerializeObject(checkOption, Formatting.Indented, new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-dd" })}");
             }
 
             // 정각마다 작동여부 로그 남기기
             if (DateTime.Now.Minute == 0)
             {
-                util.WriteLog("출근체크", $"정각 로그. CheckOption: \r\n{JsonConvert.SerializeObject(checkOption, Formatting.Indented)}");
+                util.WriteLog("출근체크", $"정각 로그. CheckOption: \r\n{JsonConvert.SerializeObject(checkOption, Formatting.Indented, new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-dd" })}");
             }
 
-            // 출근하는날이 아니면 체크 안함.
-            if (!checkOption.isWorkingDay)
+            // 출근하는날이 아니면 체크 안함.            
+            switch (checkOption.holidayType)
             {
-                return;
+                case MyHolidayType.ALL:
+                    return;                    
+                case MyHolidayType.AM:
+                    checkInTime = checkInTime.AddHours(5); // 8시: 13시, 9시: 14시, 10시: 15시
+                    break;
+                case MyHolidayType.PM:
+                    if (checkInTime < Convert.ToDateTime("09:00"))
+                    {
+                        checkOutTime = checkOutTime.AddHours(-5); // 17시: 12시
+                    }
+                    else
+                    {
+                        checkOutTime = checkOutTime.AddHours(-4); // 18시: 14시, 19시: 15시
+                    }
+                    break;
+                case MyHolidayType.NOT:
+                    break;
+                default:
+                    break;
             }
 
             #endregion
@@ -161,7 +179,7 @@ namespace WorkTimeCheckAlarmService
             }
             catch (Exception ex)
             {
-                util.MessageBox("출근체크", $"오류가 발생됐습니다. 이벤트로그 확인해주세요.{ex.ToString()}", 1);
+                util.MessageBox("출근체크", $"오류가 발생됐습니다. 이벤트로그 확인해주세요.\r\n{ex.ToString()}", 1);
             }
             #endregion
 
@@ -180,7 +198,7 @@ namespace WorkTimeCheckAlarmService
             }
             catch (Exception ex)
             {
-                util.MessageBox("퇴근체크", $"오류가 발생됐습니다. 이벤트로그 확인해주세요.{ex.ToString()}", 1);
+                util.MessageBox("퇴근체크", $"오류가 발생됐습니다. 이벤트로그 확인해주세요.\r\n{ex.ToString()}", 1);
             }
             #endregion
         }
@@ -190,13 +208,12 @@ namespace WorkTimeCheckAlarmService
         /// 근무일 체크
         /// </summary>
         /// <returns></returns>
-        private bool CheckWorkingDay()
+        private MyHolidayType CheckHolidayType(DateTime nowDate, bool log = true)
         {
-
             // 주말에는 체크 안함
-            if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
+            if (nowDate.DayOfWeek == DayOfWeek.Saturday || nowDate.DayOfWeek == DayOfWeek.Sunday)
             {
-                return false;
+                return MyHolidayType.ALL;
             }
 
             // 공휴일 체크
@@ -204,10 +221,13 @@ namespace WorkTimeCheckAlarmService
             {
                 foreach (Holiday item in checkOption.holiday)
                 {
-                    if (item.date < DateTime.Now && DateTime.Now < item.date.AddDays(1))
+                    if (item.date < nowDate && nowDate < item.date.AddDays(1))
                     {
-                        util.WriteLog("출근체크", $"공휴일!. CheckOption: \r\n{JsonConvert.SerializeObject(checkOption, Formatting.Indented)}");
-                        return false;
+                        if (log)
+                        {
+                            util.WriteLog("출근체크", $"공휴일!. CheckOption: \r\n{JsonConvert.SerializeObject(checkOption, Formatting.Indented, new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-dd" })}");
+                        }
+                        return MyHolidayType.ALL;
                     }
                 }
             }
@@ -216,16 +236,20 @@ namespace WorkTimeCheckAlarmService
             // 개인 휴일 체크 안함
             if (checkOption.myHoliday != null)
             {
-                foreach (DateTime item in checkOption.myHoliday)
+                foreach (Holiday item in checkOption.myHoliday)
                 {
-                    if (item < DateTime.Now && DateTime.Now < item.AddDays(1))
+                    if (item.date < nowDate && nowDate < item.date.AddDays(1))
                     {
-                        util.WriteLog("출근체크", $"쉬는날!. CheckOption: \r\n{JsonConvert.SerializeObject(checkOption, Formatting.Indented)}");
-                        return false;
+                        if (log)
+                        {
+                            util.WriteLog("출근체크", $"쉬는날{item.type.ToString("f")}!. CheckOption: \r\n{JsonConvert.SerializeObject(checkOption, Formatting.Indented, new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-dd" })}");
+                        }
+                        return item.type;
                     }
                 }
             }
-            return true;
+
+            return MyHolidayType.NOT;
         }
 
 
@@ -264,33 +288,92 @@ namespace WorkTimeCheckAlarmService
         {
             string result = util.GetResponse($"{checkInOutUrl}&cdSabn={checkOption.cdSabn}&fgGubn=Off", string.Empty, 10000, "GET", null, null, out outCookie);
             ResultInfo resultInfo = JsonConvert.DeserializeObject<ResultInfo>(result);
-            if (resultInfo.code == 200 || resultInfo.message == "OK")
+            if (resultInfo.code == 200 || resultInfo.message == "OK" || resultInfo.code == 204 || resultInfo.message == "NO_CONTENT")
             {
                 checkOption.isCheckOutCall = true;
                 if (useMessage)
                 {
-                    util.MessageBox("퇴근체크", "퇴근체크 완료", 0);
+                    DateTime tomorrow = DateTime.Now.AddDays(1);
+                    MyHolidayType tomorrowHolidayType = CheckHolidayType(tomorrow, false);
+                    if (tomorrowHolidayType != MyHolidayType.NOT)
+                    {
+                        util.MessageBox("퇴근체크", $"퇴근체크가 완료되었습니다. \r\n\r\n 내일 {tomorrowHolidayType.ToString("f")} 에입니다.", 0);
+                    }
+                    else
+                    {
+                        if (util.MessageBox("퇴근체크", "퇴근체크는 되었습니다.\r\n\r\n 내일 연차 또는 반차입니까?", 4, false) == 6)
+                        {
+                            int tomorrowCheck = util.MessageBox("퇴근체크", "내일 연차입니까?", 3, false);
+
+                            if (tomorrowCheck == 6)
+                            {
+                                checkOption.myHoliday.Add(new Holiday { date = tomorrow, type = MyHolidayType.ALL, name = "" });
+                                WriteCheckOption();
+                                return;
+                            }
+                            else if (tomorrowCheck == 2)
+                            {
+                                return;
+                            }
+
+                            tomorrowCheck = util.MessageBox("퇴근체크", "내일 오전반차입니까?", 3, false);
+                            if (tomorrowCheck == 6)
+                            {
+                                checkOption.myHoliday.Add(new Holiday { date = tomorrow, type = MyHolidayType.AM, name = "" });
+                                WriteCheckOption();
+                                return;
+                            }
+                            else if (tomorrowCheck == 2)
+                            {
+                                return;
+                            }
+
+                            tomorrowCheck = util.MessageBox("퇴근체크", "내일 오후반차입니까?", 3, false);
+                            if (tomorrowCheck == 6)
+                            {
+                                checkOption.myHoliday.Add(new Holiday { date = tomorrow, type = MyHolidayType.PM, name = "" });
+                                WriteCheckOption();
+                                return;
+                            }
+                            else if (tomorrowCheck == 2)
+                            {
+                                return;
+                            }
+                        }
+                    }
                 }
                 else
                 {
                     util.WriteLog("퇴근체크", "퇴근체크 완료");
                 }
             }
-            else if (resultInfo.code == 204 || resultInfo.message == "NO_CONTENT")
-            {
-                checkOption.isCheckOutCall = true;
-                if (useMessage)
-                {
-                    util.MessageBox("퇴근체크", "이미 퇴근체크 함", 0);
-                }
-                else
-                {
-                    util.WriteLog("퇴근체크", "이미 퇴근체크 함");
-                }
-            }
             else
             {
                 util.MessageBox("퇴근체크", result, 0);
+            }
+        }
+
+
+        /// <summary>
+        /// 옵션 설정값 저장
+        /// </summary>
+        private void WriteCheckOption()
+        {
+            CheckOptionSetting setting = new CheckOptionSetting()
+            {
+                checkInTime = checkOption.checkInTime,
+                checkOutTime = checkOption.checkOutTime,
+                id = checkOption.id,
+                useCheckInAutoCall = checkOption.useCheckInAutoCall,
+                holiday = checkOption.holiday,
+                myHoliday = checkOption.myHoliday
+            };
+
+            using (StreamWriter sWriter = new StreamWriter(settingFilePath + settingFileName, false, Encoding.GetEncoding("euc-kr")))
+            {
+                string settingText = JsonConvert.SerializeObject(setting, Formatting.Indented, new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-dd" }).Replace("\n      \"", " \"").Replace("\n    }", " }");
+                sWriter.WriteLine(settingText);
+                util.MessageBox("출근체크", $"설정 파일이 재 셋팅되었습니다.", 0);
             }
         }
 
@@ -310,8 +393,6 @@ namespace WorkTimeCheckAlarmService
                     }
                 }
             }
-
-
 
             if (string.IsNullOrWhiteSpace(checkOption.id))
             {
@@ -336,9 +417,26 @@ namespace WorkTimeCheckAlarmService
                 checkOption.isCheckInCall = true;
             }
             checkOption.cdSabn = setEncId(checkOption.id);
-            checkOption.isWorkingDay = CheckWorkingDay();
+            checkOption.holidayType = CheckHolidayType(DateTime.Now);
 
-            util.WriteLog("출근체크", $"설정파일 로드. CheckOption: \r\n{JsonConvert.SerializeObject(checkOption, Formatting.Indented)}");
+            // 출근하는날이 아니면 체크 안함.            
+            switch (checkOption.holidayType)
+            {
+                case MyHolidayType.AM:
+                    checkOption.checkInTime = Convert.ToDateTime(checkOption.checkInTime).AddHours(5).ToString("HH:mm"); // 8시: 13시, 9시: 14시, 10시: 15시
+                    break;
+                case MyHolidayType.PM:
+                    if (Convert.ToDateTime(checkOption.checkInTime) < Convert.ToDateTime("09:00"))
+                    {
+                        checkOption.checkOutTime = Convert.ToDateTime(checkOption.checkOutTime).AddHours(-5).ToString("HH:mm"); // 17시: 12시
+                    }
+                    else
+                    {
+                        checkOption.checkOutTime = Convert.ToDateTime(checkOption.checkOutTime).AddHours(-4).ToString("HH:mm"); // 18시: 14시, 19시: 15시
+                    }
+                    break;                
+            }
+            util.WriteLog("출근체크", $"설정파일 로드. CheckOption: \r\n{JsonConvert.SerializeObject(checkOption, Formatting.Indented, new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-dd" })}");
         }
 
         /// <summary>
@@ -392,9 +490,41 @@ namespace WorkTimeCheckAlarmService
     /// <summary>
     /// 체크 옵션
     /// </summary>
-    public class CheckOption
+    public class CheckOption : CheckOptionSetting
     {
+        /// <summary>
+        /// 랜덤 출근 시간
+        /// </summary>
         public int addMinute { get; set; }
+
+        /// <summary>
+        /// 사번(암호화값)
+        /// </summary>
+        public string cdSabn { get; set; }
+        /// <summary>
+        /// 출근체크 여부
+        /// </summary>
+        public bool isCheckInCall { get; set; }
+
+        /// <summary>
+        /// 퇴근체크 여부
+        /// </summary>
+        public bool isCheckOutCall { get; set; }
+        
+        /// <summary>
+        /// PC 사용여부 (로그온 여부로 감지)
+        /// </summary>
+        public bool useDesktop { get; set; }
+
+        /// <summary>
+        /// 출근체크하는날 여부
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public MyHolidayType holidayType { get; set; } = MyHolidayType.NOT;                
+    }
+
+    public class CheckOptionSetting
+    {
         /// <summary>
         /// 출근시간
         /// </summary>
@@ -409,55 +539,56 @@ namespace WorkTimeCheckAlarmService
         /// 사번
         /// </summary>
         public string id { get; set; }
-
-        /// <summary>
-        /// 사번(암호화값)
-        /// </summary>
-        public string cdSabn { get; set; }
-
-        /// <summary>
-        /// PC 사용여부 (로그온 여부로 감지)
-        /// </summary>
-        public bool useDesktop { get; set; }
+        
 
         /// <summary>
         /// true: PC 사용여부 상관없이 주말을 제외하고 자동으로 출근체크 함. 
         /// false: PC 사용여부를 체크하여 출근체크 로직이 작동함.
         /// </summary>
         public bool useCheckInAutoCall { get; set; }
-
-        /// <summary>
-        /// 출근체크 여부
-        /// </summary>
-        public bool isCheckInCall { get; set; }
-
-        /// <summary>
-        /// 퇴근체크 여부
-        /// </summary>
-        public bool isCheckOutCall { get; set; }
-
-        /// <summary>
-        /// 출근체크하는날 여부
-        /// </summary>
-        public bool isWorkingDay { get; set; } = true;
-
+        
         /// <summary>
         /// 쉬는날
         /// </summary>                
-        public List<DateTime> myHoliday { get; set; }
+        public List<Holiday> myHoliday { get; set; }
 
         /// <summary>
         /// 공휴일
         /// </summary>
-        [JsonIgnore]
         public List<Holiday> holiday { get; set; }
+
     }
 
     public class Holiday
     {
         public DateTime date { get; set; }
 
+        [JsonConverter(typeof(StringEnumConverter))]
+        public MyHolidayType type { get; set; } = MyHolidayType.ALL;
+
         public string name { get; set; }
+
+        
+    }
+
+    public enum MyHolidayType
+    {
+        /// <summary>
+        /// 휴일아님
+        /// </summary>        
+        NOT = 0,
+        /// <summary>
+        /// 연차
+        /// </summary>        
+        ALL = 1,
+        /// <summary>
+        /// 오전반차
+        /// </summary>        
+        AM = 2,
+        /// <summary>
+        /// 오후반차
+        /// </summary>        
+        PM = 3
     }
 
 

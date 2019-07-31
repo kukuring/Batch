@@ -33,7 +33,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_50F5B2081E30478D837570533BE18E44"
+        "MsmKey" = "8:_62A166D83EC74733B9F4A12BFEA19556"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -45,6 +45,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7B2CE8C170BA43B8AEA34FB38AF406CC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_85E382130DAC423980933037636CD6BE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -52,12 +58,6 @@
         "Entry"
         {
         "MsmKey" = "8:_8F83008D011D4C5BAF762A206627309C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A48A16AC00CF4D9D852C469539E7E5CF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -169,6 +169,48 @@
     {
         "CustomAction"
         {
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_1FC5663354BF4C7FAF46FA349C586F82"
+            {
+            "Name" = "8:WorkTimeCheckAlram_Delete.exe"
+            "Condition" = "8:"
+            "Object" = "8:_62A166D83EC74733B9F4A12BFEA19556"
+            "FileType" = "3:2"
+            "InstallAction" = "3:3"
+            "Arguments" = "8:/Rollback"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_0F56833E_19E3_4E95_9D69_AD0F5CDBC45B"
+            "InstallerClass" = "11:FALSE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_B7AAC92417C443B699E9F17E2EEEE43C"
+            {
+            "Name" = "8:WorkTimeCheckAlram_Create.exe"
+            "Condition" = "8:"
+            "Object" = "8:_7B2CE8C170BA43B8AEA34FB38AF406CC"
+            "FileType" = "3:2"
+            "InstallAction" = "3:2"
+            "Arguments" = "8:/Commit"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_C799ACBC_4C83_4A4E_861B_646EC28EAE32"
+            "InstallerClass" = "11:FALSE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_D8E21C4B67C44F69AC319EFF7E1B3C3A"
+            {
+            "Name" = "8:WorkTimeCheckAlram_Delete.exe"
+            "Condition" = "8:"
+            "Object" = "8:_62A166D83EC74733B9F4A12BFEA19556"
+            "FileType" = "3:2"
+            "InstallAction" = "3:4"
+            "Arguments" = "8:/Uninstall"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_011AE6B4_0213_48FE_AE2B_CCCF2E6A2F53"
+            "InstallerClass" = "11:FALSE"
+            "CustomActionData" = "8:"
+            }
         }
         "DefaultFeature"
         {
@@ -263,10 +305,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_50F5B2081E30478D837570533BE18E44"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_62A166D83EC74733B9F4A12BFEA19556"
             {
-            "SourcePath" = "8:..\\WorkTimeCheckAlarmService\\WorkTimeCheckAlram_Create.bat"
-            "TargetName" = "8:WorkTimeCheckAlram_Create.bat"
+            "SourcePath" = "8:..\\WorkTimeCheckAlarmService\\WorkTimeCheckAlram_Delete.exe"
+            "TargetName" = "8:WorkTimeCheckAlram_Delete.exe"
             "Tag" = "8:"
             "Folder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
             "Condition" = "8:"
@@ -314,6 +356,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7B2CE8C170BA43B8AEA34FB38AF406CC"
+            {
+            "SourcePath" = "8:..\\WorkTimeCheckAlarmService\\WorkTimeCheckAlram_Create.exe"
+            "TargetName" = "8:WorkTimeCheckAlram_Create.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_85E382130DAC423980933037636CD6BE"
             {
             "SourcePath" = "8:..\\WorkTimeCheckAlarmService\\Notice.txt"
@@ -340,26 +402,6 @@
             "TargetName" = "8:create.ico"
             "Tag" = "8:"
             "Folder" = "8:_5CAA4F1DA8A74B318E14B7A256970F78"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A48A16AC00CF4D9D852C469539E7E5CF"
-            {
-            "SourcePath" = "8:..\\WorkTimeCheckAlarmService\\WorkTimeCheckAlram_Delete.bat"
-            "TargetName" = "8:WorkTimeCheckAlram_Delete.bat"
-            "Tag" = "8:"
-            "Folder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -493,7 +535,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WorkTimeCheckAlram"
         "ProductCode" = "8:{5BA85040-088A-4CD6-98CB-9DBCAFC4BF13}"
-        "PackageCode" = "8:{F8949B08-F1D9-4076-A47B-1D6FAA5CC3B9}"
+        "PackageCode" = "8:{7727F7CF-E84A-4182-9EE3-8BE8A334E125}"
         "UpgradeCode" = "8:{C7ECF37F-59B2-43B7-BB54-4FED5DB6A757}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -649,7 +691,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_A48A16AC00CF4D9D852C469539E7E5CF"
+            "Target" = "8:_62A166D83EC74733B9F4A12BFEA19556"
             "Folder" = "8:_34195AA1663B4E3DAF624590A68545B8"
             "WorkingFolder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
             "Icon" = "8:_006F09CA4CCE4D16B645D2F052397488"
@@ -663,7 +705,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_50F5B2081E30478D837570533BE18E44"
+            "Target" = "8:_7B2CE8C170BA43B8AEA34FB38AF406CC"
             "Folder" = "8:_34195AA1663B4E3DAF624590A68545B8"
             "WorkingFolder" = "8:_DCF9FE77E53E4DBC8ABD68C47759F911"
             "Icon" = "8:_8F83008D011D4C5BAF762A206627309C"

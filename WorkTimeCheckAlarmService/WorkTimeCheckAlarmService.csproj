@@ -123,7 +123,9 @@
     <Content Include="Notice.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="WorkTimeCheck.png" />
+    <Content Include="WorkTimeCheckAlram_Create.exe" />
+    <Content Include="WorkTimeCheckAlram_Delete.exe" />
+    <Content Include="출퇴근체크로직.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
